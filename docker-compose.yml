@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v2.10
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "8080:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  livorno:
+    build: .
+    volumes: 
+      - ./config/livorno.php:/var/www/html/area.php
+    labels:
+      - "traefik.http.routers.livorno.rule=Query(`user=livorno`)"
+
+  arezzo:
+    build: .
+    volumes: 
+      - ./config/arezzo.php:/var/www/html/area.php
+    labels:
+      - "traefik.http.routers.arezzo.rule=Query(`user=arezzo`)"

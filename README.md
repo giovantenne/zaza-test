@@ -1,0 +1,3 @@
+- Avviare i servizi con `docker-compose up`
+- Arezzo: http://localhost:8080/?user=arezzo
+- Livorno: http://localhost:8080/?user=livorno
